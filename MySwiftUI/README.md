@@ -9,6 +9,9 @@ Increment 버튼을 클릭하여 count를 증가시키는 비즈니스 로직을
 
 ### CorrectStateObjectView
 
+![img](https://github.com/user-attachments/assets/3243a9e3-100b-4fdd-9b19-99b79847c7f7)
+
+
 ViewModel의 생명주기를 관리하는 @StateObject 프로퍼티 래퍼를 통해 ViewModel 인스턴스를 소유하고 관리하여 올바른 사용을 이해합니다.
 
 ### WrongObservedObjectView
@@ -17,3 +20,5 @@ ViewModel을 @ObservedObject로 넘겨받아 뷰가 다시 그려질 때마다 V
 
 ---
 각 뷰들은 LifecycleTestContainerView에서 토글에 의해 생성되고 파괴됩니다. 각 뷰가 생성 및 파괴되는 과정에서 ViewModel 인스턴스의 생명주기가 어떻게 동작하는지 학습할 수 있었습니다.
+
+![img (1)](https://github.com/user-attachments/assets/89d76cf1-df95-4d90-96d1-e6960e38e04f)
