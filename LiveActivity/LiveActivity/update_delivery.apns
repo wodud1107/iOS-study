@@ -1,0 +1,16 @@
+{
+    "Simulator Target Bundle": "JY.LiveActivity", 
+    "aps": {
+        "timestamp": 1893456000,
+        "event": "update",
+        "content-state": {
+            "status": "집 앞 도착!",
+            "arrivalTime": "곧 도착",
+            "driverName": "김배달"
+        },
+        "alert": {
+            "title": "배달 업데이트",
+            "body": "기사님이 집 근처에 도착했습니다."
+        }
+    }
+}

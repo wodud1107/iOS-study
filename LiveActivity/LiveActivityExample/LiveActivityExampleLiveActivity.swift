@@ -9,64 +9,51 @@ import ActivityKit
 import WidgetKit
 import SwiftUI
 
-
-
 struct LiveActivityExampleLiveActivity: Widget {
     var body: some WidgetConfiguration {
-        ActivityConfiguration(for: LiveActivityExampleAttributes.self) { context in
+        ActivityConfiguration(for: PizzaDeliveryAttributes.self) { context in
             // Lock screen/banner UI goes here
-            VStack {
-                Text("Hello \(context.state.emoji)")
+            VStack(alignment: .leading) {
+                HStack {
+                    Image(systemName: "box.truck.badge.clock")
+                        .foregroundStyle(.indigo)
+                    Text("주문 번호 #\(context.attributes.orderNumber)")
+                        .font(.headline)
+                        .foregroundStyle(.white)
+                }
+                Text("\(context.state.driverName) 기사님이 배달 중입니다.")
+                    .foregroundStyle(.white)
+                Text("상태: \(context.state.status) (도착: \(context.state.arrivalTime))")
+                    .bold()
+                    .foregroundStyle(.white)
             }
-            .activityBackgroundTint(Color.cyan)
-            .activitySystemActionForegroundColor(Color.black)
+            .padding()
+            .activityBackgroundTint(Color.black.opacity(0.8))
 
         } dynamicIsland: { context in
             DynamicIsland {
                 // Expanded UI goes here.  Compose the expanded UI through
                 // various regions, like leading/trailing/center/bottom
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("Leading")
+                    Label("\(context.attributes.numberOfItems)개", systemImage: "bag")
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text("Trailing")
+                    Text(context.state.arrivalTime)
+                        .font(.title2)
+                        .foregroundStyle(.indigo)
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text("Bottom \(context.state.emoji)")
-                    // more content
+                    Text(context.state.status)
+                        .font(.caption)
                 }
             } compactLeading: {
-                Text("L")
+                Image(systemName: "box.truck.fill")
+                    .foregroundStyle(.indigo)
             } compactTrailing: {
-                Text("T \(context.state.emoji)")
+                Text(context.state.arrivalTime)
             } minimal: {
-                Text(context.state.emoji)
+                Image(systemName: "timer")
             }
-            .widgetURL(URL(string: "http://www.apple.com"))
-            .keylineTint(Color.red)
         }
     }
-}
-
-extension LiveActivityExampleAttributes {
-    fileprivate static var preview: LiveActivityExampleAttributes {
-        LiveActivityExampleAttributes(name: "World")
-    }
-}
-
-extension LiveActivityExampleAttributes.ContentState {
-    fileprivate static var smiley: LiveActivityExampleAttributes.ContentState {
-        LiveActivityExampleAttributes.ContentState(emoji: "😀")
-     }
-     
-     fileprivate static var starEyes: LiveActivityExampleAttributes.ContentState {
-         LiveActivityExampleAttributes.ContentState(emoji: "🤩")
-     }
-}
-
-#Preview("Notification", as: .content, using: LiveActivityExampleAttributes.preview) {
-   LiveActivityExampleLiveActivity()
-} contentStates: {
-    LiveActivityExampleAttributes.ContentState.smiley
-    LiveActivityExampleAttributes.ContentState.starEyes
 }

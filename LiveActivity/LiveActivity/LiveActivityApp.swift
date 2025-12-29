@@ -13,31 +13,6 @@ struct LiveActivityApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .onAppear {
-                    LiveActivityApp.startLiveActivity()
-                }
         }
-    }
-}
-
-extension LiveActivityApp {
-    static func startLiveActivity() {
-        guard Activity<LiveActivityExampleAttributes>.activities.isEmpty,
-                      ActivityAuthorizationInfo().areActivitiesEnabled else { return }
-
-                let initialContentState = LiveActivityExampleAttributes.ContentState(emoji: "🫶")
-                let activityAttributes = LiveActivityExampleAttributes(name: "love")
-
-                do {
-                    _ = try Activity.request(
-                        attributes: activityAttributes,
-                        content: .init(
-                            state: initialContentState,
-                            staleDate: nil
-                        )
-                    )
-                } catch {
-                    print("LiveActivity not available: \(error.localizedDescription)")
-                }
     }
 }
